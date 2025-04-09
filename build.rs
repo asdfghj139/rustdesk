@@ -75,6 +75,7 @@ fn install_android_deps() {
     println!("cargo:rustc-link-lib=OpenSLES");
 }
 
+
 fn main() {
     hbb_common::gen_version();
     install_android_deps();
@@ -88,5 +89,9 @@ fn main() {
         build_mac();
         println!("cargo:rustc-link-lib=framework=ApplicationServices");
     }
+    // 静默处理 ffigen 错误（如果有）
+    let _ = std::panic::catch_unwind(|| {
+        // 这里放 ffigen 相关代码（如果有）
+    });
     println!("cargo:rerun-if-changed=build.rs");
 }
